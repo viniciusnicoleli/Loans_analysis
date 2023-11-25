@@ -21,9 +21,10 @@ class data_processing:
         return self.df
     
     @staticmethod
-    def fill_nulls_per_id(col: str, data: pd.DataFrame) -> pd.DataFrame:
+    def complex_fillna_per_id(col: str, data: pd.DataFrame) -> pd.DataFrame:
         """Preencher os nulos baseado numa regra
         de checar o id anterior e comparar com o id posterior
+        utilizando as datas de operação.
 
         *Coleta os ID's nulos para aquela coluna
         *FOR para cada um dos ID's que possuem nulos
@@ -120,3 +121,66 @@ class data_processing:
                     data.loc[df_a.loc[index_a,'index'],col] = 'no_info'
 
         return data
+    
+    @staticmethod
+    def complex_fillna_cep_complement(df: pd.DataFrame, col: str) -> None:
+        """Função que preencha os dados adicionais do CEP como
+        bairro, cidade e estado, evitando vazamento de informação.
+        """
+        ids_nulos = df[df[col].isna()]['id'].unique().tolist()
+
+        for id_nulo in ids_nulos:
+            print('Replicando para',id_nulo)
+
+            df_a = df[df['id'] == id_nulo].sort_values(by='data_operacao').reset_index()
+            index_todos = df_a[df_a[col].isna()].index.to_list()
+
+            if df_a.shape[0] > 1:
+                print('Index dos nulos', index_todos)
+
+                for index_a in index_todos:
+                    print('Replicando para o index_a', index_a)
+
+                    cep_id_nulo = df_a.loc[index_a, 'cep']
+                    print(cep_id_nulo)
+                    dados_filtro = df_a[(df_a['cep'] == cep_id_nulo) & (df_a.index != index_a)][col].value_counts(dropna=False).reset_index()
+                    print(dados_filtro)
+                    if dados_filtro.empty:
+                        print('Não encontrei nenhum CEP igual ao do index, portanto nan')
+                        valor_receber = 'nan'
+                    else:
+                        if dados_filtro[(~dados_filtro['index'].isna())].empty:
+                            print('As outras observações desse ID com esse CEP, só possuem nan')
+                            valor_receber = 'nan'
+                        else:
+                            print('Filtrando pela observação que mais aparece')
+                            valor_receber = str(dados_filtro[(~dados_filtro['index'].isna())][['index',col]].max()['index'])
+
+                        # valor_receber = str(dados_filtro[(dados_filtro[col] == dados_filtro[col].max()) & (str(dados_filtro[col]) != 'nan')]['index'][0])
+
+                    if valor_receber != 'nan':
+                        df.loc[df_a.loc[index_a,'index'],col] = valor_receber
+                    else:
+                        df.loc[df_a.loc[index_a,'index'],col] = 'no_info'
+            
+            else:
+                print('Apenas uma observação para esse id, no_info')
+                df.loc[df_a.loc[index_todos[0],'index'],col] = 'no_info'
+
+
+
+    
+    @staticmethod
+    def simple_fillna_per_id(df: pd.DataFrame, col: str) -> None:
+        """Preenche os nulos de maneira simplificada
+        utilizando ffill e bfill, se o DataFrame possui apenas 1 observação
+        se utiliza então fillna('no_info')
+
+        ffill: pega o valor anterior ao do id
+        bfill: pega o valor posterior ao do id
+        no_info: quando só existe uma observação para aquele ID.
+        """
+        df[col] = df.groupby(['id'])[col].transform(lambda x: x.fillna(method='ffill').fillna(method='bfill').fillna('no_info'))
+    
+
+
