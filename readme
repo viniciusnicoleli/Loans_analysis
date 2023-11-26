@@ -7,11 +7,11 @@ A base de dados apresenta informações fictícias sobre operações de clientes
 O tempo previsto para execução desta atividade é de até 2h. 
 Utilizando Python e Jupyter Notebook, faça as seguintes tarefas: 
 
-1.	Faça uma análise inicial dos dados: você encontrou algum problema? Como você trataria estes problemas?
+1.	[DONE] Faça uma análise inicial dos dados: você encontrou algum problema? Como você trataria estes problemas?
 
-* Nulos NOK
+* Nulos NOK [DONE]
     * Utilizar a func da classe para
-        * cep
+        * cep 
         * telefone
         * cartao
         * ocupacao
@@ -19,11 +19,28 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
         * bairro [checar]
         * cidade [checar]
         * estado [checar]
-* Tipagem de dados OK
-* Duplicatas [ ] 
+* Tipagem de dados [Chnage DateTime]
+* Duplicatas [Não tem duplicatas]
+* Alterar textos
+* Checagem de colunas desnecessárias
+* Utilizar CSS e HTML markdown
+
 
 2.	Faça uma análise exploratória dos dados: distribuições de variáveis, outliers, correlações, etc.
 
 3.	Faça uma projeção do crescimento da carteira para os próximos 2 anos em termos de volume de operações e da carteira utilizando os métodos de ciência de dados que julgar mais adequados para essa tarefa.
+* Fazer um pipeline com os inputs
 
+# Tasks
 
+* Criar um codigo que pega o bairro cidade e estado corretamente
+
+Para testar quando for fazer a inputação
+
+df[df['id'] == '28196e08d4217f9dd1c2afcf4e2dac52e2644bb8']
+df_a = df[df['id'] == '28196e08d4217f9dd1c2afcf4e2dac52e2644bb8'].sort_values(by='data_operacao').reset_index()
+index_todos = df_a[df_a['bairro'].isna()].index.to_list()
+index_todos
+cep_id_nulo = df_a.loc[0, 'cep']
+dados_filtro = df_a[(df_a['cep'] == cep_id_nulo) & (df_a.index != 0)]['bairro'].value_counts(dropna=False).reset_index()
+dados_filtro

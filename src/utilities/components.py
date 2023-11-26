@@ -181,6 +181,17 @@ class data_processing:
         no_info: quando só existe uma observação para aquele ID.
         """
         df[col] = df.groupby(['id'])[col].transform(lambda x: x.fillna(method='ffill').fillna(method='bfill').fillna('no_info'))
+
+    @staticmethod
+    def split_email(df):
+        
+        for index, row in df.iterrows():
+            try:
+                df.loc[index,'email'] = row['email'].split(',')[0]
+            except:
+                df.loc[index,'email'] = row['email']
+
+
     
 
 
