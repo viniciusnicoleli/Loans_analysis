@@ -19,6 +19,7 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
         * bairro [checar]
         * cidade [checar]
         * estado [checar]
+    sns.pairplot(data=penguins, hue="species")
 * Tipagem de dados [Chnage DateTime]
 * Duplicatas [Não tem duplicatas]
 * Alterar textos
@@ -28,8 +29,20 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
 
 2.	Faça uma análise exploratória dos dados: distribuições de variáveis, outliers, correlações, etc.
 
+* Distribuições
+    * Variaveis padrão [DONE]
+    * Variaveis em um scatterplot e dists [DONE]
+    * Variaveis nested e teste kolmogorov smirnov [DONE]
+* Outliers [Cooks distance, boxplot] [DONE]
+    Estudo dos outliers
+* Correlações [Spearman, Pearson, VIF] [DONE]
+* Gráficos de séries temporais [Evolução ID, Média Accumulada ID] [Focus]
+* Gráficos free [Ridge line, Area]
+
+* Teste de hipótese
+
 3.	Faça uma projeção do crescimento da carteira para os próximos 2 anos em termos de volume de operações e da carteira utilizando os métodos de ciência de dados que julgar mais adequados para essa tarefa.
-* Fazer um pipeline com os inputs
+* Fazer um pipeline com os inputsb
 
 # Tasks
 
