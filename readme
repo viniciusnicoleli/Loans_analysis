@@ -34,10 +34,12 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
     * Variaveis em um scatterplot e dists [DONE]
     * Variaveis nested e teste kolmogorov smirnov [DONE]
 * Outliers [Cooks distance, boxplot] [DONE]
-    Estudo dos outliers
-* Correlações [Spearman, Pearson, VIF] [DONE]
-* Gráficos de séries temporais [Evolução ID, Média Accumulada ID] [Focus]
-* Gráficos free [Ridge line, Area]
+    Estudo dos outliers [DONE]
+* Correlações [Spearman, VIF] [DONE]
+* Gráficos free [Ridge line] [DONE]
+* Gráficos de séries temporais [Média {Operação}, Soma] [DONE]
+* Gráfico de temporais utilizando bins [mensal, trimestral] [DONE]
+* Calcular o PSI [DONE]
 
 * Teste de hipótese
 
