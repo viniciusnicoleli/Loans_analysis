@@ -44,7 +44,8 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
 * Teste de hipótese
 
 3.	Faça uma projeção do crescimento da carteira para os próximos 2 anos em termos de volume de operações e da carteira utilizando os métodos de ciência de dados que julgar mais adequados para essa tarefa.
-* Fazer um pipeline com os inputsb
+* Fazer uma classe que cria todas as variáveis passadas [DONE]
+* Entender a fundo o problema []
 
 # Tasks
 
