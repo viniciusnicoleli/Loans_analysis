@@ -51,21 +51,6 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
 * Utilizando ARIMA fazer uma predição ao longo de 2 anos da quantidade de contratos [DONE]
 
 
-* Organizar o código.
-* Construir corretamente as analises explicando.
-* Preparar a apresentação.
-* Fazer os gráficos para ANO.
+* Organizar o código. [DONE]
+* Fazer os gráficos para ANO. [WORKING]
 
-# Tasks
-
-* Criar um codigo que pega o bairro cidade e estado corretamente
-
-Para testar quando for fazer a inputação
-
-df[df['id'] == '28196e08d4217f9dd1c2afcf4e2dac52e2644bb8']
-df_a = df[df['id'] == '28196e08d4217f9dd1c2afcf4e2dac52e2644bb8'].sort_values(by='data_operacao').reset_index()
-index_todos = df_a[df_a['bairro'].isna()].index.to_list()
-index_todos
-cep_id_nulo = df_a.loc[0, 'cep']
-dados_filtro = df_a[(df_a['cep'] == cep_id_nulo) & (df_a.index != 0)]['bairro'].value_counts(dropna=False).reset_index()
-dados_filtro
