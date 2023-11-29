@@ -1,7 +1,10 @@
+from utilities.components import data_processing
+from matplotlib.ticker import FuncFormatter
+from matplotlib import pyplot as plt
+import seaborn as sns
 import pandas as pd
 import numpy as np
 import os
-from utilities.components import data_processing
 
 
 class modeller(data_processing):
@@ -83,3 +86,49 @@ class modeller(data_processing):
         print('Conclui todas as etapas!')
 
         return df.reset_index(drop=True)
+    
+    @staticmethod
+    def plotar_soma_linha_temporal(df: pd.DataFrame)->None:
+        """Plota o somatório temporal dos dados sem filtros
+        """
+        plt.subplots(figsize=(12,8))
+        df['mes_ano_formatted'] = pd.to_datetime(df['mes_ano'], format='%m_%Y')
+        df_accumulated = df.groupby(['mes_ano_formatted'])['valor_principal'].sum()
+        df_accumulated = df_accumulated.reset_index()
+        fig, ax = plt.subplots(figsize=(12, 8))
+        sns.lineplot(data=df_accumulated, x="mes_ano_formatted", y="valor_principal", ax=ax,
+                    linewidth=2.5)
+
+        plt.title('Série Temporal: Visualização da soma do valor_principal', fontsize=16, fontweight='bold', pad=10)
+        plt.ylabel('valor')
+
+        formatter = FuncFormatter(lambda x, _: f'{int(x/1e6)}MM')
+        ax.yaxis.set_major_formatter(formatter)
+
+        plt.show()
+
+    @staticmethod
+    def serie_acumulada_soma_ano(df: pd.DataFrame) -> None:
+        plt.subplots(figsize=(12,8))
+        colors = {'2019': '#437CDF', '2020': '#2E4D50', '2021': '#0651A8', '2022': '#9E9844'}
+        df['month'] = df['month'].astype('O')
+        sns.lineplot(data=df, x="month", y="valor_principal", hue="ano", palette=colors,ci=None)
+        plt.title('Série Temporal: Visualização por mes', fontsize=16, fontweight='bold', pad=10)
+        plt.ylabel('Total do valor principal')
+        plt.legend(title='Ano',title_fontsize='x-large',bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0., fontsize='x-large', ncol=1)
+        plt.xticks(rotation=0)
+        plt.tight_layout()
+        plt.show()
+    
+    @staticmethod
+    def desempenho_modelo(resultados: pd.DataFrame, df_arima: pd.DataFrame)->None:
+        """Plota o desempenho do modelo e seus resultados.
+        """
+        plt.subplots(figsize=(12,8))
+        plt.plot(resultados.apply(lambda x: np.quantile(x,0.5),axis=1),color='#2EC647',label='mediana')
+        plt.plot(resultados.apply(lambda x: np.quantile(x,0.95),axis=1),color='#29A4E1',label='intervalo superior')
+        plt.plot(resultados.apply(lambda x: np.quantile(x,0.05),axis=1),color='#1E6F49',label='intervalo inferior')
+        plt.plot(df_arima)
+        plt.title('Analisando o desempenho do Arima',fontsize='20',pad=10)
+        plt.legend(title='Curvas')
+        plt.show()

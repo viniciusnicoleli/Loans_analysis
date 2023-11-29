@@ -45,7 +45,16 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
 
 3.	Faça uma projeção do crescimento da carteira para os próximos 2 anos em termos de volume de operações e da carteira utilizando os métodos de ciência de dados que julgar mais adequados para essa tarefa.
 * Fazer uma classe que cria todas as variáveis passadas [DONE]
-* Entender a fundo o problema []
+* Entender a fundo o problema [DONE]
+* Avaliar os residuos das correlações para entender a presença de sazonalidade e ruído branco com reg linear [DONE]
+* Utilizando ARIMA fazer uma predição ao longo de 2 anos da quantidade de Empréstimo da Carteira [DONE]
+* Utilizando ARIMA fazer uma predição ao longo de 2 anos da quantidade de contratos [DONE]
+
+
+* Organizar o código.
+* Construir corretamente as analises explicando.
+* Preparar a apresentação.
+* Fazer os gráficos para ANO.
 
 # Tasks
 

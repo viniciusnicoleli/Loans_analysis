@@ -285,6 +285,19 @@ class plotter:
         plt.show()
 
     @staticmethod
+    def serie_acumulada_soma_ano(df: pd.DataFrame) -> None:
+        plt.subplots(figsize=(12,8))
+        colors = {'2019': '#437CDF', '2020': '#2E4D50', '2021': '#0651A8', '2022': '#9E9844'}
+        df['month'] = df['month'].astype('O')
+        sns.lineplot(data=df, x="month", y="valor_principal", hue="ano", palette=colors,ci=None)
+        plt.title('Série Temporal: Visualização por mes', fontsize=16, fontweight='bold', pad=10)
+        plt.ylabel('Total do valor principal')
+        plt.legend(title='Ano',title_fontsize='x-large',bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0., fontsize='x-large', ncol=1)
+        plt.xticks(rotation=0)
+        plt.tight_layout()
+        plt.show()
+
+    @staticmethod
     def checar_volumetria(df: pd.DataFrame)->None:
         """Checar a volumetria por mes de cada um dos decentis
         """
