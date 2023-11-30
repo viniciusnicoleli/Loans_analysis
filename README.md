@@ -9,5 +9,7 @@ ________________________________________________________________________________
 
 Criado por @viniciusnicoleli.
 
+Notas: Devido a utilização de HTML e CSS nos notebooks, pode acontecer de não renderizar no GitHub
+
 
 
