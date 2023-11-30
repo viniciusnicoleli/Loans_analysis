@@ -8,8 +8,13 @@ ________________________________________________________________________________
 ### :diamond_shape_with_a_dot_inside: Totalmente animado com a oportunidade, espero que gostem!
 
 Criado por @viniciusnicoleli.
+______________________________________________________________________________________________________________________________
+### :diamond_shape_with_a_dot_inside: Notas Importantes
+* Devido a utilização de HTML e CSS nos notebooks, pode acontecer de não renderizar no GitHub;
+* Eu utilizo o VScode e o Jupyter Notebook no modo escuro, por isso a cor mais clara no GitHub;
+* Alguns conteúdos não tem explicação diretamente no notebook, deixei para explicar na fala no dia da apresentação.
 
-Notas: Devido a utilização de HTML e CSS nos notebooks, pode acontecer de não renderizar no GitHub
+
 
 
 
