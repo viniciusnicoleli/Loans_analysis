@@ -52,5 +52,6 @@ Utilizando Python e Jupyter Notebook, faça as seguintes tarefas:
 
 
 * Organizar o código. [DONE]
-* Fazer os gráficos para ANO. [WORKING]
+* Fazer o Split Train e Test. [DONE]
+* Fazer a avaliação dos modelos utilizando RMSE [DONE]
 
