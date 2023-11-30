@@ -132,3 +132,34 @@ class modeller(data_processing):
         plt.title('Analisando o desempenho do Arima',fontsize='20',pad=10)
         plt.legend(title='Curvas')
         plt.show()
+
+    @staticmethod
+    def forecast_accuracy(forecast, actual):
+        """Função construída por contribuidores do Kaggle para avaliar
+        O modelo em diferentes termos
+        """
+        mape = np.mean(np.abs(forecast - actual)/np.abs(actual))  # MAPE
+        me = np.mean(forecast - actual)             # ME
+        mae = np.mean(np.abs(forecast - actual))    # MAE
+        mpe = np.mean((forecast - actual)/actual)   # MPE
+        rmse = np.mean((forecast - actual)**2)**.5  # RMSE
+        corr = np.corrcoef(forecast, actual)[0,1]   # corr
+        mins = np.amin(np.hstack([forecast[:,None], 
+                                actual[:,None]]), axis=1)
+        maxs = np.amax(np.hstack([forecast[:,None], 
+                                actual[:,None]]), axis=1)
+        minmax = 1 - np.mean(mins/maxs)             # minmax
+        return({'mape':mape, 'me':me, 'mae': mae, 
+                'mpe': mpe, 'rmse':rmse, 
+                'corr':corr, 'minmax':minmax})
+    
+    def plotar_avaliacao_modelo(train: pd.DataFrame, test: pd.DataFrame, fc_series: pd.Series) -> None:
+        """Plota um gráfico que avalia o desempenho do modelo.
+        """
+        plt.figure(figsize=(12,5), dpi=100)
+        plt.plot(np.log(train), label='training')
+        plt.plot(np.log(test), label='actual')
+        plt.plot(fc_series, label='forecast')
+        plt.title('Forecast vs Actuals')
+        plt.legend(loc='upper left', fontsize=8)
+        plt.show()
